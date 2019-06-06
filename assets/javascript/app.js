@@ -16,18 +16,18 @@ var myQuestions = [
     },
     {
         question: "What was the name of the character Joey played on Days of Our Lives?",
-        options: ["Dr. Peter Tucker", "Dr. Drake Ramoray", "Dr. Samuel Heller"],
-        correctanswer: 1,
+        options: {a: "Dr. Peter Tucker", b: "Dr. Drake Ramoray", c: "Dr. Samuel Heller"},
+        correctanswer: "b",
     },
     {
         question: "What was the name of the department store that Rachel worked for?",
-        options: ["Macy's", "Bloomingdale's", "Target"],
-        correctanswer: 1,
+        options: {a: "Macy's", b:"Bloomingdale's", c:"Target"},
+        correctanswer: "b",
     },
     {
         question: "What is Monica's occupation?",
-        options: ["Waiter", "Chef", "Singer"],
-        correctanswer: 1,
+        options: {a:"Waiter", b:"Chef", c: "Singer"},
+        correctanswer: "b",
     },
 ]
 
@@ -87,6 +87,5 @@ $(document).ready(function () {
             if (userChoice === correctanswer) { win(); }
             else { lose() };
         };
-
     });
 });
