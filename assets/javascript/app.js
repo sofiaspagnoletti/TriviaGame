@@ -39,12 +39,7 @@ var intervalId;
 function runTimer() {
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
-}
-
-function decrement() {
-
-    secondsInTimer--;
-    $("#time-left").html("<h2>" + secondsInTimer + "</h2>");
+    secondsInTimer = 10;
 }
 
 
@@ -58,10 +53,21 @@ function lose() {
     resetGame();
 }
 
+function decrement() {
+    secondsInTimer--;
+    $("#time-left").html("<h2>" + secondsInTimer + "</h2>");
+
+    stopGame();
+}
+
 function stopGame() {
-    if (secondsInTimer === 0) {
+    if (secondsInTimer <= 0) {
         $("#wins").text("Wins: " + wins);
         $("#losses").text("Losses: " + losses);
+        $("#questions").empty();
+        clearInterval(intervalId);
+        $("#time-left").empty();
+
     }
 }
 
@@ -70,7 +76,6 @@ userClickedOption =
     $(document).ready(function () {
         $("#start").on("click", function () {
             runTimer();
-            // $("#questions").text(" " + myQuestions.question);
            
             for (let i = 0; i < myQuestions.length; i++) {
                 const element = myQuestions[i];
@@ -80,19 +85,14 @@ userClickedOption =
                 
                 
                 var divOptions = $("<div>");
-                // <input type="radio" name="gender" value="male"> Male<br></br>
                 var optionName = "answer" + i;
                 divOptions.html(
                     '<input type="radio" name="' + optionName + '" value="a"> ' + element.options.a + ' <br/>' +
                     '<input type="radio" name="' + optionName + '" value="b"> ' + element.options.b + ' <br/>' +
                     '<input type="radio" name="' + optionName + '" value="c"> ' + element.options.c + ' <br/>');
-                // divOptions.text(" " + element.options.b);
-                // divOptions.text(" " + element.options.c);
+               
                 $("#questions").append(divOptions);
 
-                // const content = $("#questions").html();
-                // $("#questions").html(content + element.question);
-                // $("#questions").html(" "+ element.options);
             }
            
         });
@@ -100,4 +100,5 @@ userClickedOption =
         stopGame();
     });
 
+//TODO: end game when timer is ===0 and show results
 
