@@ -42,7 +42,6 @@ function runTimer() {
     secondsInTimer = 10;
 }
 
-
 function win() {
     wins++;
     resetGame();
@@ -62,43 +61,54 @@ function decrement() {
 
 function stopGame() {
     if (secondsInTimer <= 0) {
+        countPoints();
         $("#wins").text("Wins: " + wins);
         $("#losses").text("Losses: " + losses);
         $("#questions").empty();
         clearInterval(intervalId);
         $("#time-left").empty();
-
     }
 }
 
-userClickedOption =
+function countPoints() {
+    // For each question
+    // Check if the selected answer matches the correct answer in my array
+    //        If it does, count a win
+    //        If it doesn't count a lose.
+    for (let i = 0; i < myQuestions.length; i++) {
+        const element = myQuestions[i];
+        if ($('input[name="answer' + i + '"]:checked').val() === element.correctanswer) {
+            wins++;
+        } else {
+            losses++;
+        }
+    }
+}
 
-    $(document).ready(function () {
-        $("#start").on("click", function () {
-            runTimer();
-           
-            for (let i = 0; i < myQuestions.length; i++) {
-                const element = myQuestions[i];
-                var divQuestion = $("<div>");
-                divQuestion.text(" " + element.question);
-                $("#questions").append(divQuestion);
-                
-                
-                var divOptions = $("<div>");
-                var optionName = "answer" + i;
-                divOptions.html(
-                    '<input type="radio" name="' + optionName + '" value="a"> ' + element.options.a + ' <br/>' +
-                    '<input type="radio" name="' + optionName + '" value="b"> ' + element.options.b + ' <br/>' +
-                    '<input type="radio" name="' + optionName + '" value="c"> ' + element.options.c + ' <br/>');
-               
-                $("#questions").append(divOptions);
 
-            }
-           
-        });
 
-        stopGame();
+$(document).ready(function () {
+    $("#start").on("click", function () {
+        runTimer();
+
+        for (let i = 0; i < myQuestions.length; i++) {
+            const element = myQuestions[i];
+            var divQuestion = $("<div>");
+            divQuestion.text(" " + element.question);
+            $("#questions").append(divQuestion);
+
+
+            var divOptions = $("<div>");
+            var optionName = "answer" + i;
+            divOptions.html(
+                '<input type="radio" name="' + optionName + '" value="a"> ' + element.options.a + ' <br/>' +
+                '<input type="radio" name="' + optionName + '" value="b"> ' + element.options.b + ' <br/>' +
+                '<input type="radio" name="' + optionName + '" value="c"> ' + element.options.c + ' <br/>');
+
+            $("#questions").append(divOptions);
+        }
     });
+    stopGame();
+});
 
-//TODO: end game when timer is ===0 and show results
-
+//TODO: Add done button to stop game before timer runs out.
