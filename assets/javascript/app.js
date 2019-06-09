@@ -40,6 +40,11 @@ function runTimer() {
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
     secondsInTimer = 10;
+    wins = 0;
+    losses = 0;
+    $("#wins").empty();
+    $("#losses").empty();
+    $("#done").show();
 }
 
 function win() {
@@ -60,6 +65,7 @@ function decrement() {
 }
 
 function stopGame() {
+
     if (secondsInTimer <= 0) {
         countPoints();
         $("#wins").text("Wins: " + wins);
@@ -67,6 +73,7 @@ function stopGame() {
         $("#questions").empty();
         clearInterval(intervalId);
         $("#time-left").empty();
+        $("#done").hide();
     }
 }
 
@@ -85,9 +92,21 @@ function countPoints() {
     }
 }
 
+function doneButton() {
+    $("#done").on("click", function () {
+        countPoints();
+        $("#wins").text("Wins: " + wins);
+        $("#losses").text("Losses: " + losses);
+        $("#questions").empty();
+        clearInterval(intervalId);
+        $("#time-left").empty();
+        $("#done").hide();
+    });
+}
 
 
 $(document).ready(function () {
+    $("#done").hide();
     $("#start").on("click", function () {
         runTimer();
 
@@ -106,9 +125,12 @@ $(document).ready(function () {
                 '<input type="radio" name="' + optionName + '" value="c"> ' + element.options.c + ' <br/>');
 
             $("#questions").append(divOptions);
+
         }
+
     });
+    doneButton();
     stopGame();
 });
 
-//TODO: Add done button to stop game before timer runs out.
+//TODO: Add to portfolio. 
