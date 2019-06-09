@@ -33,13 +33,13 @@ var myQuestions = [
 
 var wins = 0;
 var losses = 0;
-var secondsInTimer = 10;
+var secondsInTimer = 20;
 var intervalId;
 
 function runTimer() {
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
-    secondsInTimer = 10;
+    secondsInTimer = 20;
     wins = 0;
     losses = 0;
     $("#wins").empty();
@@ -95,8 +95,8 @@ function countPoints() {
 function doneButton() {
     $("#done").on("click", function () {
         countPoints();
-        $("#wins").text("Wins: " + wins);
-        $("#losses").text("Losses: " + losses);
+        $("#wins").text("Correct answers: " + wins);
+        $("#losses").text("Incorrect answers: " + losses);
         $("#questions").empty();
         clearInterval(intervalId);
         $("#time-left").empty();
@@ -129,8 +129,33 @@ $(document).ready(function () {
         }
 
     });
+
     doneButton();
     stopGame();
+
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'https://pragmaticcomputing.files.wordpress.com/2017/04/friends_theme_song.mp3');
+    
+    $("#stop-song").hide();
+
+    audioElement.addEventListener('ended', function () {
+        this.play();
+    }, false);
+
+    $('#play-song').click(function () {
+        audioElement.play();
+        $("#play-song").hide();
+        $("#stop-song").show();
+        $("#status").text("Status: Playing");
+    });
+
+    $('#stop-song').click(function () {
+        audioElement.pause();
+        $("#stop-song").hide();
+        $("#play-song").show();
+        $("#status").text("Status: Paused");
+    });
+
 });
 
 //TODO: Add to portfolio. 

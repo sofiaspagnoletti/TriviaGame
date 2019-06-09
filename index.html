@@ -17,36 +17,60 @@
             <a href="#" class="navbar-brand d-flex align-items-center">
                 <strong>Trivia Time!</strong>
             </a>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <button id="play-song" class="btn btn-secondary">
+                        Play song
+                    </button>
+                    <button id="stop-song" class="btn btn-secondary">
+                        Pause song
+                    </button>
+                </div>
+            </nav>
         </div>
     </div>
 
     <div>
-        
-        <section class="jumbotron text-center">
-            <div class="container">
+
+        <section class="jumbotron jumbotron-fluid">
+            <div class="container text-center">
                 <img src="assets/images/logo.png" width="270" height="50" class="d-inline-block align-top"
                     alt="friends">
                 <p>
                     <br>
                     <br>
-                    <button type="button" id="start" class="btn btn-outline-secondary">Start Game</button>
+                    <button type="button" id="start" class="btn btn-secondary btn-lg">Start Game</button>
                 </p>
                 <br>
-                <p class="lead text-muted">
+            </div>
+            <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <button id="play-song" class="btn btn-secondary active">
+                    Play theme song
+                </button>
+                <button id="stop-song" class="btn btn-secondary active">
+                    Pause song
+                </button>
+            </div> -->
+
+        </section>
+
+        <body class="text-center">
+            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <div class="inner">
                     <h3 id="time-left"></h3>
                     <div id="questions"></div>
                     <br>
                     <button type="button" id="done" class="btn btn-outline-secondary">Done!</button>
                     <p id="wins"></p>
                     <p id="losses"></p>
-
+                    </p>
+                </div>
             </div>
-        </section>
-    </div>
 
 
 
-    <script src="assets/javascript/app.js"></script>
-</body>
+
+            <script src="assets/javascript/app.js"></script>
+        </body>
 
 </html>
